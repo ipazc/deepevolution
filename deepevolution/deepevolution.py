@@ -192,8 +192,17 @@ class DeepEvolution:
             Generator yielding a tuple with [the generation (list of weights), max score, mean score, std score].
             Iterate over this generator to process each generation of the evolution.
         """
+        def default_fitness_func(model, X, Y):
+            result = model.evaluate(X, Y, batch_size=1024, verbose=0)
+
+            if type(result) is list:
+                result = result[0]
+
+            result = result * -1
+            return result
+
         if fitness_func is None:
-            fitness_func = lambda model, x, y: model.evaluate(x, y, batch_size=1024, verbose=0)[0] * -1
+            fitness_func = default_fitness_func
 
         self._adjust_generation(population)
 

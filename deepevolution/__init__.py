@@ -1,4 +1,3 @@
-from tensorflow.keras.models import Model
 from deepevolution.deepevolution import DeepEvolution
 from tqdm.auto import tqdm
 
@@ -22,12 +21,14 @@ def _fit_evolve_wrapper(self, X, Y, max_generations=100, fitness_func=None, popu
     }
 
     for generation_id, (_, best_score, mean_score, std_score) in enumerate(de.evolve(X, Y, max_generations, fitness_func, population, top_k, mutation_rate, mutation_std)):
+        generation_id += 1
         history['score'].append(mean_score)
         if update_func:
             update_func(generation_id, mean_score, best_score, std_score)
 
     return history
 
-
-Model.evolve = _evolve_wrapper
-Model.fit_evolve = _fit_evolve_wrapper
+def wrap_keras():
+    from tensorflow.keras.models import Model
+    Model.evolve = _evolve_wrapper
+    Model.fit_evolve = _fit_evolve_wrapper

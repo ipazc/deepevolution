@@ -18,16 +18,26 @@ It can be installed through pip:
 
     $ pip install deepevolution
 
+It requires tensorflow > 2.0.0. It can be installed as follows:
+
+.. code:: bash
+
+    $ pip install deepevolution[tf]
+    # or
+    $ pip install deepevolution[tf_gpu]
+
 
 USAGE
 #####
 
-Its usage is as simple as follows:
+Import the package after you import the keras model class. The `deepevolution` package automatically binds the `fit_evolve()` method to the keras model class, making it instantly available to any keras model. Its usage is as simple as follows:
 
 .. code:: python
 
     from tensorflow.keras.models import Model
-    import deepevolution
+    from deepevolution import wrap_keras
+
+    wrap_keras()
 
     ## ... Build a keras model `model`...
 
@@ -35,6 +45,19 @@ Its usage is as simple as follows:
 
 The default fitness function is the negative loss function of the model (must be compiled). For different fitnesses
 functions, check the ADVANCED section.
+
+
+EXAMPLE WITH MNIST
+##################
+
+Two examples can be found for the MNIST with the same feed-forward neural network in the folder `examples/`
+In one, the negative MSE loss is used as fitness function (the default behaviour). In the other, the accuracy metric
+is used for evolving the network.
+
+.. image:: fitness_evolution.png
+    :target: examples/
+
+
 
 UNDER-THE-HOOD
 ##############

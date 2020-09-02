@@ -3,8 +3,6 @@ DEEPEVOLUTION
 
 .. image:: https://badge.fury.io/py/deepevolution.svg
     :target: https://badge.fury.io/py/deepevolution
-.. image:: https://travis-ci.org/ipazc/deepevolution.svg?branch=master
-    :target: https://travis-ci.org/ipazc/deepevolution
 
 Implementation of a evolution algorithm for tensorflow keras models. It allows to evolve a keras neural network model for tasks where no differentiable loss functions are possible.
 
@@ -50,12 +48,12 @@ functions, check the ADVANCED section.
 EXAMPLE WITH MNIST
 ##################
 
-Two examples can be found for the MNIST with the same feed-forward neural network in the folder `examples/`
+Two examples can be found for the MNIST with the same feed-forward neural network in the folder `examples/` of the repository (https://github.com/ipazc/deepevolution/tree/master/examples).
 In one, the negative MSE loss is used as fitness function (the default behaviour). In the other, the accuracy metric
 is used for evolving the network.
 
-.. image:: fitness_evolution.png
-    :target: examples/
+.. image:: https://raw.githubusercontent.com/ipazc/deepevolution/master/fitness_evolution.png
+    :target: https://github.com/ipazc/deepevolution/tree/master/examples
 
 
 

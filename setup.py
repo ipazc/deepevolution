@@ -3,7 +3,7 @@
 
 import sys
 from setuptools import setup, setuptools
-
+from deepevolution import __version__
 
 __author__ = 'Iván de Paz Centeno'
 
@@ -18,7 +18,7 @@ if sys.version_info < (3, 4, 1):
 
 
 setup(name='deepevolution',
-      version="0.0.1",
+      version=__version__,
       description='A genetic algorithm to evolve tensorflow keras neural networks.',
       long_description=readme(),
       url='http://github.com/ipazc/deepevolution',

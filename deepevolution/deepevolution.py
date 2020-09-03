@@ -45,6 +45,9 @@ class DeepEvolution:
             self._generation = self._generation[:new_population]
 
         elif len(self._generation) < new_population:
+            if len(self._generation) == 0:
+                self._generation.append(self._model.get_weights())
+
             for remaining_individual in range(new_population - len(self._generation)):
                 self._generation.append(self._build_random_model_weights(self._model))
 

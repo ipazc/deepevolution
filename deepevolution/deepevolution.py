@@ -209,17 +209,24 @@ class DeepEvolution:
 
         self._adjust_generation(population)
 
-        for generation_id in range(max_generations):
-            best_weights = self._find_elite(fitness_func, X, Y, top_k=top_k)
-            index = best_weights.index.to_series()
+        try:
+            for generation_id in range(max_generations):
+                best_weights = self._find_elite(fitness_func, X, Y, top_k=top_k)
+                index = best_weights.index.to_series()
 
-            max_score = np.round(index.max(), 4)
-            mean_score = np.round(index.mean(), 4)
-            std_score = np.round(index.std(), 4)
+                max_score = np.round(index.max(), 4)
+                mean_score = np.round(index.mean(), 4)
+                std_score = np.round(index.std(), 4)
 
-            self._generation = best_weights.tolist() + self._crossover(best_weights.tolist(), mutation_rate,
-                                                                       mutation_std)
-            self._model.set_weights(self._generation[0])
+                self._generation = best_weights.tolist() + self._crossover(best_weights.tolist(), mutation_rate,
+                                                                           mutation_std)
+                self._model.set_weights(self._generation[0])
 
-            tf.keras.backend.clear_session()
-            yield self._generation, max_score, mean_score, std_score
+                tf.keras.backend.clear_session()
+                yield self._generation, max_score, mean_score, std_score
+
+        except KeyboardInterrupt as e:
+            if len(self._generation) > 0:
+                self._model.set_weights(self._generation[0])
+
+            raise e from None
